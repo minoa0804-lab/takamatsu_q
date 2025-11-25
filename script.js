@@ -300,6 +300,8 @@ function handleTimeout() {
     question: summarizeQuestion(q?.question),
     explanation: q?.explanation,
     isCorrect: false,
+    chosen: "未回答",
+    correctAnswer: String(q?.answer).toLowerCase() === "true" ? "○" : "×",
   });
   questionCounter += 1;
   setTimeout(() => {
@@ -324,6 +326,7 @@ function handleAnswer(choice) {
   const q = currentQuestionItem?.question;
   const correctAnswer = String(q?.answer).toLowerCase() === "true";
   const isCorrect = choice === correctAnswer;
+  const chosen = choice === null ? "未回答" : choice ? "○" : "×";
   if (isCorrect) {
     resultState.correct += 1;
   }
@@ -332,6 +335,8 @@ function handleAnswer(choice) {
     question: summarizeQuestion(q?.question),
     explanation: q?.explanation,
     isCorrect,
+    chosen,
+    correctAnswer: correctAnswer ? "○" : "×",
   });
   questionCounter += 1;
   setTimeout(() => {
@@ -374,7 +379,9 @@ function finishQuiz() {
       const exp = item.explanation || "解説はありません。";
       const questionHtml = `「${escapeHTML(item.question)}」`;
       const answerHtml = escapeHTML(exp).replace(/\n/g, "<br>");
-      elements.explanation.innerHTML = `第${item.number}問: <span class="question-highlight">${questionHtml}</span><br>${answerHtml}`;
+      const player = item.chosen || "未回答";
+      const correct = item.correctAnswer || "";
+      elements.explanation.innerHTML = `第${item.number}問: <span class="question-highlight">${questionHtml}</span><br>あなたの回答: ${player}${correct ? ` / 正解: ${correct}` : ""}<br>${answerHtml}`;
     });
     elements.wrongList.appendChild(btn);
   });
