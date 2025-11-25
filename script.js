@@ -322,7 +322,8 @@ function handleAnswer(choice) {
   clearInterval(timerId);
   stopOvertimeSound();
   const q = currentQuestionItem?.question;
-  const isCorrect = choice !== null && String(q?.answer) === String(choice);
+  const correctAnswer = String(q?.answer).toLowerCase() === "true";
+  const isCorrect = choice === correctAnswer;
   if (isCorrect) {
     resultState.correct += 1;
   }
