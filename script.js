@@ -26,6 +26,7 @@ const elements = {
   wrongList: document.getElementById("wrongList"),
   explanation: document.getElementById("explanation"),
 };
+elements.start.disabled = true;
 
 function createLoopingAudio(src) {
   const audio = new Audio(src);
@@ -55,6 +56,7 @@ let resultState = { correct: 0, details: [] };
 let actualQuestionTotal = TOTAL_QUESTIONS;
 let currentQuestionItem = null;
 let currentQuestionNumber = 0;
+let questionsLoaded = false;
 
 function showView(name) {
   Object.values(views).forEach((v) => v.classList.remove("active"));
@@ -65,6 +67,10 @@ async function loadQuestions() {
   try {
     const res = await fetch("questions.json", { cache: "no-cache" });
     allQuestions = await res.json();
+    questionsLoaded = Array.isArray(allQuestions) && allQuestions.length > 0;
+    if (questionsLoaded) {
+      elements.start.disabled = false;
+    }
   } catch (err) {
     elements.questionText.textContent = "問題データを読み込めませんでした。";
     console.error(err);
@@ -390,7 +396,7 @@ function resetState() {
 }
 
 function startQuiz() {
-  if (!allQuestions.length) {
+  if (!questionsLoaded) {
     elements.questionText.textContent = "問題データの読み込みをお待ちください。";
     return;
   }

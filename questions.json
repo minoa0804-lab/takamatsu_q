@@ -3,14 +3,14 @@
     "id": "q001",
     "genre": "検察庁",
     "question": "「起訴するのが仕事！」でおなじみの検察庁。実は本当に起訴を担当する組織である。○か×か？",
-    "answer": false,
+    "answer": true,
     "explanation": "検察庁は刑事事件の起訴・不起訴を決める権限を持つ。"
   },
   {
     "id": "q002",
     "genre": "検察庁",
     "question": "検察庁は警察から送られてくる事件を“ジャッジ”する役割もある。○か×か？",
-    "answer": false,
+    "answer": true,
     "explanation": "警察の捜査結果を受けて、起訴するか判断するのは検察庁。"
   },
   {
@@ -24,7 +24,7 @@
     "id": "q004",
     "genre": "検察庁",
     "question": "日本の検察庁のトップは「検事総長」。これは実在の役職である。○か×か？",
-    "answer": false,
+    "answer": true,
     "explanation": "検察庁の最上位は最高検察庁に所属する検事総長。"
   },
   {
@@ -38,14 +38,14 @@
     "id": "q006",
     "genre": "検察庁",
     "question": "全国どの都道府県にも地方検察庁が設置されている。○か×か？",
-    "answer": false,
+    "answer": true,
     "explanation": "地方検、支部、区検を含めて全国をカバーしている。"
   },
   {
     "id": "q007",
     "genre": "検察庁",
     "question": "検察庁は行政機関の一つ。名前は堅いけど役割は意外と幅広い。○か×か？",
-    "answer": false,
+    "answer": true,
     "explanation": "法務省の機関で、刑事手続に関わる行政機関。"
   },
   {
@@ -59,21 +59,21 @@
     "id": "q009",
     "genre": "検察庁",
     "question": "被害者支援も検察庁の大事な仕事のひとつである。○か×か？",
-    "answer": false,
+    "answer": true,
     "explanation": "被害者支援員の配置や説明などを行う。"
   },
   {
     "id": "q010",
     "genre": "検察庁",
     "question": "「最高検察庁」という最上位の組織がちゃんと存在している。○か×か？",
-    "answer": false,
+    "answer": true,
     "explanation": "全国の検察庁のトップに位置する機関。"
   },
   {
     "id": "q011",
     "genre": "検察官",
     "question": "検察官は「起訴する／しない」を決めるパワーを持っている。○か×か？",
-    "answer": false,
+    "answer": true,
     "explanation": "検察官のもっとも重要な権限のひとつ。"
   },
   {
@@ -101,14 +101,14 @@
     "id": "q015",
     "genre": "検察官",
     "question": "検察官は全員が法律のプロフェッショナルである。○か×か？",
-    "answer": false,
+    "answer": true,
     "explanation": "司法試験合格者であり、専門教育も受ける。"
   },
   {
     "id": "q016",
     "genre": "検察官",
     "question": "女性の検察官もどんどん増えていて、今や珍しくない。○か×か？",
-    "answer": false,
+    "answer": true,
     "explanation": "男女問わず活躍している職種。"
   },
   {
@@ -122,35 +122,35 @@
     "id": "q018",
     "genre": "検察官",
     "question": "裁判で被告人の有罪を主張するのが検察官の立ち位置である。○か×か？",
-    "answer": false,
+    "answer": true,
     "explanation": "検察官は公訴の維持を担当する。"
   },
   {
     "id": "q019",
     "genre": "検察官",
     "question": "検察官は弁護士・裁判官と同じく司法試験を突破している。○か×か？",
-    "answer": false,
+    "answer": true,
     "explanation": "三者とも司法試験を通過している。"
   },
   {
     "id": "q020",
     "genre": "検察官",
     "question": "検察官は“起訴を決めるプロ”。国家公務員である。○か×か？",
-    "answer": false,
+    "answer": true,
     "explanation": "法務省所属の国家公務員。"
   },
   {
     "id": "q021",
     "genre": "検察事務官",
     "question": "検察事務官は検察官を支える“影の実力者”。○か×か？",
-    "answer": false,
+    "answer": true,
     "explanation": "捜査補助や事務、調整など多岐にわたる。"
   },
   {
     "id": "q022",
     "genre": "検察事務官",
     "question": "検察事務官は裁判所に書類を提出することもある。○か×か？",
-    "answer": false,
+    "answer": true,
     "explanation": "起訴状や令状請求書類の提出などを担当することがある。"
   },
   {
@@ -164,7 +164,7 @@
     "id": "q024",
     "genre": "検察事務官",
     "question": "検察事務官が被疑者の取調べをする場面もある。○か×か？",
-    "answer": false,
+    "answer": true,
     "explanation": "捜査補助として取り調べを担当することがある。"
   },
   {
@@ -192,14 +192,14 @@
     "id": "q028",
     "genre": "検察事務官",
     "question": "裁判所とのやり取りも検察事務官の担当である。○か×か？",
-    "answer": false,
+    "answer": true,
     "explanation": "書類提出や連絡業務などを行う。"
   },
   {
     "id": "q029",
     "genre": "検察事務官",
     "question": "検察事務官は専門研修を受けて仕事を覚えていく。○か×か？",
-    "answer": false,
+    "answer": true,
     "explanation": "法務総合研究所などで研修を受ける。"
   },
   {
@@ -213,35 +213,35 @@
     "id": "q031",
     "genre": "高松地方検察庁",
     "question": "高松地方検察庁は香川県をまるごと管轄している。○か×か？",
-    "answer": false,
+    "answer": true,
     "explanation": "香川県全体の刑事事件を扱う地方検。"
   },
   {
     "id": "q032",
     "genre": "高松地方検察庁",
     "question": "高松地方検察庁は県庁のすぐ近くにある“身近な司法機関”。○か×か？",
-    "answer": false,
+    "answer": true,
     "explanation": "県庁や裁判所と近接している。"
   },
   {
     "id": "q033",
     "genre": "高松地方検察庁",
     "question": "裁判所のすぐ隣にあるのが高松地方検察庁の特徴である。○か×か？",
-    "answer": false,
+    "answer": true,
     "explanation": "高松高裁・地裁の隣にある。"
   },
   {
     "id": "q034",
     "genre": "高松地方検察庁",
     "question": "高松地方検察庁の管轄内には支部や区検も存在している。○か×か？",
-    "answer": false,
+    "answer": true,
     "explanation": "丸亀区検などの区検を管轄。"
   },
   {
     "id": "q035",
     "genre": "高松地方検察庁",
     "question": "高松地方検察庁は香川県内の刑事事件の中枢を担う存在である。○か×か？",
-    "answer": false,
+    "answer": true,
     "explanation": "起訴や公判維持の中心となる。"
   },
   {
@@ -255,7 +255,7 @@
     "id": "q037",
     "genre": "高松地方検察庁",
     "question": "市民からの相談を受けられる窓口がある。○か×か？",
-    "answer": false,
+    "answer": true,
     "explanation": "犯罪被害者支援や相談窓口が設置されることがある。"
   },
   {
@@ -269,14 +269,14 @@
     "id": "q039",
     "genre": "高松地方検察庁",
     "question": "高松地方検察庁では見学会などを行うことがある。○か×か？",
-    "answer": false,
+    "answer": true,
     "explanation": "広報活動の一環として実施される場合がある。"
   },
   {
     "id": "q040",
     "genre": "高松地方検察庁",
     "question": "香川県で“地方検察庁”といえばこの一つだけである。○か×か？",
-    "answer": false,
+    "answer": true,
     "explanation": "香川県には高松地方検察庁ひとつのみ。"
   },
   {
@@ -290,21 +290,21 @@
     "id": "q042",
     "genre": "香川県",
     "question": "源平合戦の名場面「屋島の戦い」が行われた“屋島”は、実は島ではない。○か×か？",
-    "answer": false,
+    "answer": true,
     "explanation": "屋島は“島っぽい”形をしているが陸続きの台地である。"
   },
   {
     "id": "q043",
     "genre": "香川県",
     "question": "香川県には“県木が2種類ある”という少しややこしい特徴がある。○か×か？",
-    "answer": false,
+    "answer": true,
     "explanation": "県木は「オリーブ」と「クロマツ」の2つ。"
   },
   {
     "id": "q044",
     "genre": "香川県",
     "question": "丸亀城の石垣は日本一高いことで知られるが、その高さは“約60m”である。○か×か？",
-    "answer": false,
+    "answer": true,
     "explanation": "総高約60mで“日本一の高さ”とされる。"
   },
   {
@@ -332,14 +332,14 @@
     "id": "q048",
     "genre": "香川県",
     "question": "香川県民にはおなじみのローカル鉄道“琴電”。その正式名称に「琴電」という言葉は含まれていない。○か×か？",
-    "answer": false,
+    "answer": true,
     "explanation": "正式名は「高松琴平電気鉄道」。"
   },
   {
     "id": "q049",
     "genre": "香川県",
     "question": "香川県の降水量は全国で“ワースト1位（最も少ない）”である。○か×か？",
-    "answer": false,
+    "answer": true,
     "explanation": "降水量が極めて少なく、全国最少クラス。"
   },
   {
