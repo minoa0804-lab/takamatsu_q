@@ -43,14 +43,18 @@ const sounds = {
 };
 
 let allQuestions = [];
-let selectedQuestions = [];
+let sequence = [];
 let currentIndex = 0;
+let questionCounter = 0;
 let timerId = null;
 let timeLeft = TIMER_SECONDS;
 let activeOvertimeTrack = null;
 let segments = [];
 let lockInput = false;
 let resultState = { correct: 0, details: [] };
+let actualQuestionTotal = TOTAL_QUESTIONS;
+let currentQuestionItem = null;
+let currentQuestionNumber = 0;
 
 function showView(name) {
   Object.values(views).forEach((v) => v.classList.remove("active"));
@@ -76,38 +80,18 @@ function shuffle(arr) {
   return copy;
 }
 
-function buildBuckets() {
-  const buckets = [];
+function buildSequence() {
+  const seq = [];
   MAIN_GENRES.forEach((genre) => {
     const items = shuffle(allQuestions.filter((q) => q.genre === genre));
-    if (items.length) buckets.push({ key: genre, items, taken: 0 });
+    if (!items.length) return;
+    seq.push({ type: "notice", genre });
+    const picks = items.slice(0, 2);
+    picks.forEach((q, idx) => {
+      seq.push({ type: "question", genre, question: q, withinGenre: idx + 1 });
+    });
   });
-  if (!buckets.length && allQuestions.length) {
-    buckets.push({ key: "その他", items: shuffle(allQuestions), taken: 0 });
-  }
-  return buckets;
-}
-
-function pickQuestions() {
-  const buckets = buildBuckets();
-  const picks = [];
-  const takeOneEach = Math.min(TOTAL_QUESTIONS, buckets.length);
-  for (let i = 0; i < takeOneEach; i += 1) {
-    const bucket = buckets[i];
-    const q = bucket.items.pop();
-    bucket.taken += 1;
-    picks.push(q);
-  }
-  while (picks.length < TOTAL_QUESTIONS) {
-    const available = buckets.filter((b) => b.items.length);
-    if (!available.length) break;
-    available.sort((a, b) => a.taken - b.taken || Math.random() - 0.5);
-    const bucket = available[0];
-    const q = bucket.items.pop();
-    bucket.taken += 1;
-    picks.push(q);
-  }
-  return shuffle(picks).slice(0, TOTAL_QUESTIONS);
+  return seq;
 }
 
 function getFrameBounds() {
@@ -156,6 +140,11 @@ function buildSegments() {
     elements.timerRing.appendChild(seg);
     segments.push(seg);
   }
+}
+
+function clearSegments() {
+  elements.timerRing.querySelectorAll(".segment").forEach((seg) => seg.remove());
+  segments = [];
 }
 
 function displayGenre(q) {
@@ -213,13 +202,30 @@ function stopFailSound() {
   sounds.fail.currentTime = 0;
 }
 
-function renderQuestion() {
-  const q = selectedQuestions[currentIndex];
-  elements.questionMeta.textContent = `${JP_DAI}${currentIndex + 1}${JP_MON} ${displayGenre(q)}`;
-  elements.progress.textContent = `${currentIndex + 1}/${TOTAL_QUESTIONS}`;
+function renderNotice(item) {
+  clearInterval(timerId);
   stopOvertimeSound();
   stopFailSound();
-  elements.questionText.textContent = `${JP_DAI}${currentIndex + 1}${JP_MON}`;
+  clearSegments();
+  elements.questionMeta.textContent = `${item.genre}の案内`;
+  elements.progress.textContent = `${questionCounter}/${actualQuestionTotal}`;
+  elements.questionText.textContent = `${item.genre}に関する問題です。`;
+  lockInput = true;
+  setTimeout(() => {
+    currentIndex += 1;
+    renderCurrentItem();
+  }, 1200);
+}
+
+function renderQuestionItem(item) {
+  currentQuestionItem = item;
+  currentQuestionNumber = questionCounter + 1;
+  const q = item.question;
+  elements.questionMeta.textContent = `${JP_DAI}${currentQuestionNumber}${JP_MON} ${displayGenre(q)}`;
+  elements.progress.textContent = `${currentQuestionNumber}/${actualQuestionTotal}`;
+  stopOvertimeSound();
+  stopFailSound();
+  elements.questionText.textContent = `${JP_DAI}${currentQuestionNumber}${JP_MON}`;
   playQuestionSound();
   lockInput = true;
   buildSegments();
@@ -228,6 +234,19 @@ function renderQuestion() {
     startTimer();
     lockInput = false;
   }, 700);
+}
+
+function renderCurrentItem() {
+  if (currentIndex >= sequence.length) {
+    finishQuiz();
+    return;
+  }
+  const item = sequence[currentIndex];
+  if (item.type === "notice") {
+    renderNotice(item);
+    return;
+  }
+  renderQuestionItem(item);
 }
 
 function startTimer() {
@@ -269,20 +288,17 @@ function handleTimeout() {
   stopOvertimeSound();
   elements.questionText.textContent = TEXT_TIME_OVER;
   playFailSound();
-  const q = selectedQuestions[currentIndex];
+  const q = currentQuestionItem?.question;
   resultState.details.push({
-    number: currentIndex + 1,
-    question: summarizeQuestion(q.question),
-    explanation: q.explanation,
+    number: currentQuestionNumber,
+    question: summarizeQuestion(q?.question),
+    explanation: q?.explanation,
     isCorrect: false,
   });
+  questionCounter += 1;
   setTimeout(() => {
     currentIndex += 1;
-    if (currentIndex >= TOTAL_QUESTIONS) {
-      finishQuiz();
-    } else {
-      renderQuestion();
-    }
+    renderCurrentItem();
   }, 1000);
 }
 
@@ -299,24 +315,21 @@ function handleAnswer(choice) {
   lockInput = true;
   clearInterval(timerId);
   stopOvertimeSound();
-  const q = selectedQuestions[currentIndex];
-  const isCorrect = choice !== null && String(q.answer) === String(choice);
+  const q = currentQuestionItem?.question;
+  const isCorrect = choice !== null && String(q?.answer) === String(choice);
   if (isCorrect) {
     resultState.correct += 1;
   }
   resultState.details.push({
-    number: currentIndex + 1,
-    question: summarizeQuestion(q.question),
-    explanation: q.explanation,
+    number: currentQuestionNumber,
+    question: summarizeQuestion(q?.question),
+    explanation: q?.explanation,
     isCorrect,
   });
+  questionCounter += 1;
   setTimeout(() => {
     currentIndex += 1;
-    if (currentIndex >= TOTAL_QUESTIONS) {
-      finishQuiz();
-    } else {
-      renderQuestion();
-    }
+    renderCurrentItem();
   }, 350);
 }
 
@@ -362,9 +375,13 @@ function finishQuiz() {
 
 function resetState() {
   currentIndex = 0;
+  questionCounter = 0;
+  currentQuestionItem = null;
+  currentQuestionNumber = 0;
   resultState = { correct: 0, details: [] };
-  selectedQuestions = pickQuestions();
-  if (!selectedQuestions.length) {
+  sequence = buildSequence();
+  actualQuestionTotal = sequence.filter((item) => item.type === "question").length;
+  if (!actualQuestionTotal) {
     elements.questionText.textContent = "ごめんなさい。questions.json を確認してください。";
     showView("menu");
     return false;
@@ -379,7 +396,7 @@ function startQuiz() {
   }
   if (!resetState()) return;
   showView("quiz");
-  renderQuestion();
+  renderCurrentItem();
 }
 
 elements.start.addEventListener("click", startQuiz);
