@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>検察・高松クイズ</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="app">
+    <section id="menu" class="view active">
+      <div class="logo">検察・高松クイズ</div>
+      <div class="card">
+        <p class="lead">検察庁・検察官・検察事務官・高松地方検察庁・香川県から全10問の○×クイズを出題。30秒のタイマーが消える前に答えてください。</p>
+        <div class="category-tags" aria-label="出題カテゴリ">
+          <span class="tag">検察庁</span>
+          <span class="tag">検察官</span>
+          <span class="tag">検察事務官</span>
+          <span class="tag">高松地方検察庁</span>
+          <span class="tag">香川県</span>
+        </div>
+        <p class="note">問題の出し方や結果画面は従来のまま。新しい問題セットで腕試ししてください。</p>
+        <div class="menu-actions">
+          <button id="startBtn" class="primary">始める</button>
+          <button id="quitBtn" class="ghost">終わる</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="quiz" class="view">
+      <div class="hud">
+        <div id="questionMeta" class="meta">第1問　ジャンル</div>
+        <div id="progress" class="progress"></div>
+      </div>
+      <div class="timer-ring" id="timerRing">
+        <div class="question-card">
+          <div id="questionText" class="question-text">読み込み中...</div>
+        </div>
+      </div>
+      <div class="answers">
+        <button class="answer-btn circle" data-answer="true">〇</button>
+        <button class="answer-btn cross" data-answer="false">×</button>
+      </div>
+    </section>
+
+    <section id="result" class="view">
+      <div class="result-card">
+        <h2>結果発表</h2>
+        <p class="score-line">正解 <span id="correctCount">0</span>/10</p>
+        <div id="wrongList" class="wrong-list"></div>
+        <div id="explanation" class="explanation"></div>
+        <div class="menu-actions">
+          <button id="restartBtn" class="primary">もう一度</button>
+          <button id="backToMenu" class="ghost">メニューへ</button>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
